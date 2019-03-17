@@ -1,17 +1,23 @@
 <%- include('partials/head.ejs') %>
 
-<body class='container'>
-    <h1>Ventory</h1>
-    <p>Welcome to a simplified inventory system</p>
-    <a href="/add-item">Add new item</a>
-    <br /><br />
-    <% if(items.length){ %>
-        <div class="list-group">
+<body class='container-fluid'>
+
+    <div class="nav-banner">
+        <div class="container">
+            <h1>Ventory</h1>
+            <p>Welcome to a simplified inventory system</p>
+            <a href="/add-item">Add new item</a>
+        </div>
+    </div>
+
+    <div class="container table-wrapper">
+        <% if(items.length){ %>
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Item Name</th>
+                        <th scope="col">Condition</th>
                         <th scope="col">Status</th>
                         <th scope="col">Shelf No.</th>
                         <th scope="col">Entry Date</th>
@@ -20,8 +26,9 @@
                 <tbody>
                     <% for(let [index, item ] of items.entries()){ %>
                     <tr>
-                        <th scope="row"><span class="badge badge-info"><%= index %></span></th>
-                        <td><h5><%= item.title %></h5></td>
+                        <th scope="row"><span class="badge badge-info"><%= index + 1 %></span></th>
+                        <td><h6><%= item.title %></h6></td>
+                        <td><p><%= item.condition %></p></td>
                         <td><p><%= item.status %></p></td>
                         <td><small><%= item.location %></small></td>
                         <td><small><%= item.entry_date %></small></td>
@@ -29,8 +36,9 @@
                     <% } %>
                 </tbody>
             </table>
-    <% }else{ %>
-        <h4>Shelf is empty. No items to display</h4>
-    <% } %>
+        <% }else{ %>
+            <h4>Shelf is empty. No items to display</h4>
+        <% } %>
+    </div>
 
 <%- include('partials/foot.ejs') %>

@@ -1,13 +1,34 @@
 body {
-  padding: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #F8F9F9;
+  padding-top: 15px;
 }
 
 a {
   color: #00B7FF;
 }
 
+.form-wrapper{
+  background: #FFF;
+  margin-top: 2rem;
+  border-top: 5px solid #CCC;
+}
+
 form{
-  border: 20px solid #EEE;
   padding: 2rem;
+}
+
+.nav-banner{
+  background: #FFF;
+  padding: 20px;
+  margin-top: -15px;
+  margin-left: -12px;
+  margin-right: -12px;
+  border-bottom: 1px solid #CCC;
+}
+
+.table-wrapper{
+  background: #FFF;
+  margin-top: 3rem;
+  border-top: 5px solid #CCC;
 }
