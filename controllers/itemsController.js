@@ -33,7 +33,7 @@ exports.postNewItem = (req, res) => {
 
 exports.fetchAllItems = (req, res) => {
   Item.fetchAllItems(items => {
-    console.log('items: ', items);
+    //console.log('items: ', items);
     res.render('itemsList', { items: items })
   });
 }

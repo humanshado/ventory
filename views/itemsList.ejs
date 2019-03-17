@@ -3,5 +3,34 @@
 <body class='container'>
     <h1>Ventory</h1>
     <p>Welcome to a simplified inventory system</p>
+    <a href="/add-item">Add new item</a>
+    <br /><br />
+    <% if(items.length){ %>
+        <div class="list-group">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Shelf No.</th>
+                        <th scope="col">Entry Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let [index, item ] of items.entries()){ %>
+                    <tr>
+                        <th scope="row"><span class="badge badge-info"><%= index %></span></th>
+                        <td><h5><%= item.title %></h5></td>
+                        <td><p><%= item.status %></p></td>
+                        <td><small><%= item.location %></small></td>
+                        <td><small><%= item.entry_date %></small></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+    <% }else{ %>
+        <h4>Shelf is empty. No items to display</h4>
+    <% } %>
 
 <%- include('partials/foot.ejs') %>
