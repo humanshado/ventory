@@ -1,6 +1,6 @@
 const path = require('path');
+const moment = require('moment');
 const { Item } = require('../models/itemModel');
-//const uuid4 = require('uuid4');
 
 exports.getNewItemForm = (req, res) => {
   res.render('newForm');
@@ -12,7 +12,7 @@ exports.postNewItem = async (req, res) => {
           status: req.body.status,
           description: req.body.description,
           category: req.body.category,
-          entry_date: req.body.entry_date,
+          entry_date: moment(req.body.entry_date).format('MMMM Do YYYY'),
           condition: req.body.condition,
           brand: req.body.brand,
           location: req.body.location,
@@ -37,7 +37,7 @@ exports.fetchAllItems = async (req, res) => {
 
 exports.showItemDetails = async (req, res) => {
   const itemId = req.params.id;
-  Item.findById(itemId).then(item => {
+  await Item.findById(itemId).then(item => {
     res.render('showItem', { item: item })
   }).catch(err => console.log('Show item details failed', err));
 

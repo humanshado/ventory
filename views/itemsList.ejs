@@ -20,7 +20,7 @@
                         <th scope="col">Condition</th>
                         <th scope="col">Status</th>
                         <th scope="col">Shelf No.</th>
-                        <th scope="col">Entry Date</th>
+                        <th scope="col">Age</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                         <td><p><%= item.condition %></p></td>
                         <td><p><%= item.status %></p></td>
                         <td><small><%= item.location %></small></td>
-                        <td><small><%= item.entry_date %></small></td>
+                        <td><small><%= moment(item.entry_date).fromNow() %></small></td>
                     </tr>
                     <% } %>
                 </tbody>
