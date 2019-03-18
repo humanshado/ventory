@@ -5,7 +5,7 @@
     <div class="nav-banner">
         <div class="container">
             <h1>Ventory</h1>
-            <p>Welcome to a simplified inventory system</p>
+            <p>A simplified inventory system</p>
             <a href="/add-item">Add new item</a>
         </div>
     </div>
@@ -27,7 +27,7 @@
                     <% for(let [index, item ] of items.entries()){ %>
                     <tr>
                         <th scope="row"><span class="badge badge-info"><%= index + 1 %></span></th>
-                        <td><h6><%= item.title %></h6></td>
+                        <td><h6><a href="/show-item/<%= item.id %>" ><%= item.title %></a></h6></td>
                         <td><p><%= item.condition %></p></td>
                         <td><p><%= item.status %></p></td>
                         <td><small><%= item.location %></small></td>

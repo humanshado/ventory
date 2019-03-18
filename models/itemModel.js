@@ -1,5 +1,6 @@
 const items = [
   {
+    id: 'jhsgfh27362',
     title: 'Book One',
     status: 'available',
     description: 'bla bla bla',
@@ -15,6 +16,7 @@ const items = [
     date_issued: '2019-03-29'
   },
   {
+    id: 'ueqgrsegf1727',
     title: 'Book Two',
     status: 'sold',
     description: 'cha cha cha',
@@ -36,6 +38,7 @@ module.exports = class Item {
 
   //constructor
   constructor(
+      id,
       title,
       status,
       description,
@@ -51,6 +54,7 @@ module.exports = class Item {
       date_issued,
       images
   ) {
+            this.id = id,
             this.title = title;
             this.status = status;
             this.description = description;

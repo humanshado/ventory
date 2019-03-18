@@ -1,5 +1,6 @@
 const path = require('path');
 const Item = require('../models/itemModel');
+const uuid4 = require('uuid4');
 
 exports.getNewItemForm = (req, res) => {
   res.render('newForm', {
@@ -9,7 +10,9 @@ exports.getNewItemForm = (req, res) => {
 }
 
 exports.postNewItem = (req, res) => {
+  let id = uuid4();
   const item = new Item(
+          req.body.id = id,
           req.body.title,
           req.body.status,
           req.body.description,
@@ -36,4 +39,11 @@ exports.fetchAllItems = (req, res) => {
     //console.log('items: ', items);
     res.render('itemsList', { items: items })
   });
+}
+
+exports.showItemDetails = (req, res) => {
+  const itemId = req.params.id;
+  res.render('showItem', { id: itemId })
+
+
 }
