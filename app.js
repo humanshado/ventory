@@ -1,10 +1,14 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const storeKeeperRouter = require('./routes/storeKeeper');
+mongoose.connect('mongodb://localhost/ventorydb', { useNewUrlParser: true })
+  .then(() => console.log('Connected to MongoDB ...'))
+  .catch(err => console.log('Failed to connect to DB', err));
+
 const usersRouter = require('./routes/users');
 const itemsRouter = require('./routes/items');
 
@@ -20,9 +24,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(storeKeeperRouter);
-app.use(usersRouter);
 app.use(itemsRouter);
+app.use(usersRouter);
 app.get('*', (req,res) => {
   res.render('404');
 });
