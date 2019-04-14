@@ -19,7 +19,7 @@ const itemSchema = new mongoose.Schema({
 
 const Item = mongoose.model('Item', itemSchema);
 
-//add validtions here later...
+//add validations here later...
 
 
 module.exports.Item = Item;

@@ -18,8 +18,12 @@ form{
   padding: 2rem;
 }
 
-.nav-banner{
+.nav-banner,
+.table-wrapper{
   background: #FFF;
+}
+
+.nav-banner{
   padding: 20px;
   margin-top: -15px;
   margin-left: -12px;
@@ -28,7 +32,6 @@ form{
 }
 
 .table-wrapper{
-  background: #FFF;
   margin-top: 3rem;
   border-top: 5px solid #CCC;
 }

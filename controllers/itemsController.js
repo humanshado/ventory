@@ -1,9 +1,7 @@
-const path = require('path');
-const moment = require('moment');
 const { Item } = require('../models/itemModel');
 
 exports.getNewItemForm = (req, res) => {
-  res.render('newForm');
+  res.render('items/new');
 }
 
 exports.postNewItem = async (req, res) => {
@@ -12,7 +10,7 @@ exports.postNewItem = async (req, res) => {
           status: req.body.status,
           description: req.body.description,
           category: req.body.category,
-          entry_date: moment(req.body.entry_date).format('MMMM Do YYYY'),
+          entry_date: req.body.entry_date,
           condition: req.body.condition,
           brand: req.body.brand,
           location: req.body.location,
@@ -25,20 +23,20 @@ exports.postNewItem = async (req, res) => {
   });
 
   await item.save().then(() => {
-    res.redirect('/');
+    res.redirect('/items/index');
   }).catch(err => console.log('New item creation failed', err));
 }
 
 exports.fetchAllItems = async (req, res) => {
     await Item.find().then(items => {
-    res.render('itemsList', { items: items })
-  }).catch(err => console.log('Fetching items failed', err));
+    res.render('items/index', { items: items })
+  }).catch(err => console.log('Fetching all items failed', err));
 }
 
 exports.showItemDetails = async (req, res) => {
   const itemId = req.params.id;
   await Item.findById(itemId).then(item => {
-    res.render('showItem', { item: item })
+    res.render('items/show', { item: item })
   }).catch(err => console.log('Show item details failed', err));
 
 }
