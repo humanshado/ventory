@@ -52,3 +52,28 @@ form{
 .table thead th{
   color: #DDD;
 }
+
+.item-show{
+  border-top: 6px solid #888685;
+  padding: 2rem;
+  margin-top: 2rem;
+  height: 85vh;
+}
+
+.image-wrapper{
+  margin-right: 2rem;
+}
+
+.card-footer{
+  margin-top: 2rem;
+  padding: 1rem;
+  border-top: none;
+}
+
+.other-cards{
+  margin-top: 2rem;
+}
+
+.other-cards .card{
+  margin-left: 4rem;
+}

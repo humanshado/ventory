@@ -1,8 +1,74 @@
 <%- include('../partials/head.ejs') %>
 
 <body class='container'></body>
-  <h3>Show Page for item with id: <%= item._id %></h3>
+  <h3><%= item.category %></h3>
   <a href="/items">See all items</a>
-  <p>Coming soon ...</p>
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+      <div class="card item-show">
+        <div class="row">
+          <div class="col-auto image-wrapper">
+            <img src="//placehold.it/200" class="img-fluid" alt="">
+          </div>
+          <div class="col">
+            <div class="card-block px-2">
+              <h4 class="card-title"><%= item.title %></h4>
+              <p class="card-text"><%= item.description %></p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          <a href="#" class="btn btn-success">Add to cart</a>
+          <a href="#" class="btn btn-danger">Remove from cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-4 other-cards">
+      <p>Other items in the same <%= item.category %> category</p>
+      <hr />
+      <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h5 class="card-title">Primary card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+          </p>
+        </div>
+      </div>
+      <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h5 class="card-title">Success card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+          </p>
+        </div>
+      </div>
+      <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h5 class="card-title">Danger card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+          </p>
+        </div>
+      </div>
+      <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h5 class="card-title">Warning card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+          </p>
+        </div>
+      </div>
+      <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h5 class="card-title">Info card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <%- include('../partials/foot.ejs') %>
