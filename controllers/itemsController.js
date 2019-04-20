@@ -23,13 +23,13 @@ exports.postNewItem = async (req, res) => {
   });
 
   await item.save().then(() => {
-    res.redirect('/items/index');
+    res.redirect('/items');
   }).catch(err => console.log('New item creation failed', err));
 }
 
 exports.fetchAllItems = async (req, res) => {
     await Item.find().then(items => {
-    res.render('items/index', { items: items })
+    res.render('items', { items: items })
   }).catch(err => console.log('Fetching all items failed', err));
 }
 

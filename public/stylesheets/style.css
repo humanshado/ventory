@@ -1,7 +1,15 @@
+html{
+  font-size: 14px;
+}
+
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Comfortaa', cursive, Helvetica, Arial, sans-serif;
   background: #F8F9F9;
   padding-top: 15px;
+}
+
+.jumbotron{
+  margin-top: 5rem;
 }
 
 a {
@@ -11,11 +19,12 @@ a {
 .form-wrapper{
   background: #FFF;
   margin-top: 2rem;
+  border: 1px solid #CCC;
   border-top: 5px solid #CCC;
 }
 
 form{
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .nav-banner,
@@ -32,6 +41,14 @@ form{
 }
 
 .table-wrapper{
-  margin-top: 3rem;
+  margin-top: 2rem;
   border-top: 5px solid #CCC;
+}
+
+.table thead{
+  background-color: #2F2F2F;
+}
+
+.table thead th{
+  color: #DDD;
 }
