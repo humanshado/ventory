@@ -2,13 +2,7 @@
 
 <body class='container-fluid'>
 
-    <div class="nav-banner">
-        <div class="container">
-            <h1>Ventory</h1>
-            <p>A simplified inventory system</p>
-            <a href="/add-item">Add new item</a>
-        </div>
-    </div>
+    <%- include('../partials/nav-lg.ejs') %>
 
     <div class="container table-wrapper">
         <% if(items && items.length){ %>

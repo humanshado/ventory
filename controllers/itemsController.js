@@ -1,8 +1,6 @@
 const { Item } = require('../models/itemModel');
 
-exports.getNewItemForm = (req, res) => {
-  res.render('items/new');
-}
+exports.getNewItemForm = (req, res) => res.render('items/new');
 
 exports.postNewItem = async (req, res) => {
   let item = await new Item({

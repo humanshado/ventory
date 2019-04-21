@@ -18,7 +18,7 @@ a {
 
 .form-wrapper{
   background: #FFF;
-  margin-top: 2rem;
+  margin-top: 1rem;
   border: 1px solid #CCC;
   border-top: 5px solid #CCC;
 }
@@ -27,17 +27,25 @@ form{
   padding: 1.5rem;
 }
 
-.nav-banner,
+.nav-banner-lg,
 .table-wrapper{
   background: #FFF;
 }
 
-.nav-banner{
+.nav-banner-lg{
   padding: 20px;
+  padding-bottom: 5px;
   margin-top: -15px;
   margin-left: -12px;
   margin-right: -12px;
   border-bottom: 1px solid #CCC;
+}
+
+.nav-banner-sm{
+  padding: 20px;
+  margin-top: -15px;
+  margin-left: -12px;
+  margin-right: -12px;
 }
 
 .table-wrapper{
@@ -61,11 +69,15 @@ form{
 }
 
 .image-wrapper{
-  margin-right: 2rem;
+  margin-right: .5rem;
+}
+
+.card-block .card-text{
+  height: 60vh;
 }
 
 .card-footer{
-  margin-top: 21rem;
+  margin-top: 2rem;
   padding: 1rem;
   border-top: none;
 }

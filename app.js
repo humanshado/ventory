@@ -1,9 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+
+//initialze app
+const app = express();
+
+// Passport Config
+require('./config/passport.config.js')(passport);
 
 //connect to database
 mongoose.connect('mongodb://localhost/ventorydb', { useNewUrlParser: true })
@@ -14,8 +21,7 @@ mongoose.connect('mongodb://localhost/ventorydb', { useNewUrlParser: true })
 const usersRouter = require('./routes/users');
 const itemsRouter = require('./routes/items');
 
-//initialze app
-const app = express();
+
 const port = process.env.PORT || 5000;
 app.locals.moment = require('moment');
 
@@ -24,10 +30,32 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //middlewares
-app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Express session
+app.use(
+  session({
+    secret: 'secret elephant',
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect flash
+app.use(flash());
+
+// Global variables
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 //routing
 app.get('/', (req, res) => {
