@@ -1,9 +1,11 @@
+const express = require('express');
+const router = express.Router();
 const { Item } = require('../models/itemModel');
 
-exports.getNewItemForm = (req, res) => res.render('items/new');
+router.get('/add-item', (req, res) => res.render('items/new'));
 
-exports.postNewItem = async (req, res) => {
-  let item = await new Item({
+router.post('/add-item', (req, res) => {
+  let item = new Item({
           title: req.body.title,
           status: req.body.status,
           description: req.body.description,
@@ -20,21 +22,25 @@ exports.postNewItem = async (req, res) => {
           imageUrl: req.body.imageUrl
   });
 
-  await item.save().then(() => {
+  item.save().then(() => {
     res.redirect('/items');
   }).catch(err => console.log('New item creation failed', err));
-}
+});
 
-exports.fetchAllItems = async (req, res) => {
-    await Item.find().then(items => {
+router.get('/items', (req, res) => {
+    // console.log('current user = ', req.user);
+    // console.log('Is user authenticated? = ', req.isAuthenticated());
+    Item.find().then(items => {
     res.render('items', { items: items })
   }).catch(err => console.log('Fetching all items failed', err));
-}
+});
 
-exports.showItemDetails = async (req, res) => {
+router.get('/show-item/:id', (req, res) => {
   const itemId = req.params.id;
-  await Item.findById(itemId).then(item => {
+  Item.findById(itemId).then(item => {
     res.render('items/show', { item: item })
   }).catch(err => console.log('Show item details failed', err));
 
-}
+});
+
+module.exports = router;

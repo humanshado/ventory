@@ -1,16 +1,15 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const passport = require('passport');
-const flash = require('connect-flash');
-const session = require('express-session');
 const path = require('path');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
+const passport = require('passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const flash = require('connect-flash');
 
 //initialze app
 const app = express();
-
-// Passport Config
-require('./config/passport.config.js')(passport);
 
 //connect to database
 mongoose.connect('mongodb://localhost/ventorydb', { useNewUrlParser: true })
@@ -18,8 +17,8 @@ mongoose.connect('mongodb://localhost/ventorydb', { useNewUrlParser: true })
   .catch(err => console.log('Failed to connect to DB', err));
 
 //importing routes
-const usersRouter = require('./routes/users');
-const itemsRouter = require('./routes/items');
+const users = require('./controllers/usersController');
+const items = require('./controllers/itemsController');
 
 
 const port = process.env.PORT || 5000;
@@ -29,25 +28,27 @@ app.locals.moment = require('moment');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//middlewares
-app.use(bodyParser.urlencoded({ extended: false }));
+//initiaizations
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Express session
-app.use(
-  session({
-    secret: 'secret elephant',
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({
+    secret: 'secret elephant is very hard to maintain',
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      collection: 'vdb-sessions'
+    }),
     resave: true,
     saveUninitialized: true
   })
 );
-
-// Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Connect flash
 app.use(flash());
+
+// Passport Config
+require('./config/passport')();
 
 // Global variables
 app.use(function (req, res, next) {
@@ -61,8 +62,8 @@ app.use(function (req, res, next) {
 app.get('/', (req, res) => {
   res.render('landingPage');
 });
-app.use(itemsRouter);
-app.use(usersRouter);
+app.use(items);
+app.use(users);
 app.get('*', (req,res) => {
   res.render('404');
 });

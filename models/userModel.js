@@ -23,13 +23,13 @@ const userSchema = new mongoose.Schema({
     },
     created_at: {
       type: Date,
-      default: Date.now
+      default: Date.now()
     },
     updated_at: {
       type: Date,
       default: ''
     },
-    last_logged_in_at: {
+    last_logged_in: {
       type: Date,
       default: ''
     }
