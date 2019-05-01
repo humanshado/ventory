@@ -4,6 +4,7 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const moment = require('moment');
+const auth = require('../config/auth');
 
 //display login form
 router.get('/login', (req, res) => res.render('users/login'));
@@ -11,14 +12,14 @@ router.get('/login', (req, res) => res.render('users/login'));
 //post login user data
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/profile',
+    successRedirect: req.session.returnTo || '/profile',
     failureRedirect: '/login',
     failureFlash: true
   })(req, res, next);
 });
 
 //User profile page
-router.get('/profile', isloggedIn, (req, res) => {
+router.get('/profile', auth.onlyAuthorized, (req, res) => {
     console.log('req.user in users controller', req.user);
     console.log('req.isAuthenticated in users controller', req.isAuthenticated());
     res.render('users/profile', { currentUser: req.user ? req.user.firstName : null });
@@ -95,16 +96,5 @@ router.post('/signup', (req, res, next) => {
       }).catch(err => console.log(err));
   }
 }); //create new user
-
-function isloggedIn (req, res, next) {
-    console.log('req.user in isLoggedIn function', req.user);
-    console.log('req.isAuthenticated', req.isAuthenticated());
-
-    if(req.isAuthenticated()){
-      return next();
-    }
-    req.flash('error_msg', 'Access denied! Please login');
-    res.redirect('/login');
-}
 
 module.exports = router;

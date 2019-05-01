@@ -68,7 +68,5 @@ app.get('*', (req,res) => {
   res.render('404');
 });
 
-
+// spin up a server
 app.listen(port, () => console.log(`server listening at port ${port}`));
-
-
