@@ -3,7 +3,9 @@ const router = express.Router();
 const { Item } = require('../models/itemModel');
 const auth = require('../config/auth');
 
-router.get('/add-item', (req, res) => res.render('items/new', { currentUser: req.user ? req.user.firstName : null }));
+router.get('/add-item', (req, res) => {
+  res.render('items/new', { currentUser: req.user ? req.user.firstName : null })
+});
 
 router.post('/add-item', (req, res) => {
   let item = new Item({

@@ -1,0 +1,13 @@
+<%- include('../partials/head.ejs') %>
+<%- include('../partials/nav-sm.ejs') %>
+<hr />
+<div class="container">
+  <h4>Welcome to Admin Dashboard</h4>
+  <ul>
+    <% users.forEach(user => { %>
+        <li><%= user.firstName %></li>
+    <% }) %>
+  </ul>
+</div>
+
+<%- include('../partials/foot.ejs') %>

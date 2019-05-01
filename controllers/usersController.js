@@ -18,13 +18,6 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-//User profile page
-router.get('/profile', auth.onlyAuthorized, (req, res) => {
-    console.log('req.user in users controller', req.user);
-    console.log('req.isAuthenticated in users controller', req.isAuthenticated());
-    res.render('users/profile', { currentUser: req.user ? req.user.firstName : null });
-});
-
 //logout user
 router.get('/logout', (req, res) => {
   req.logout();
@@ -96,5 +89,23 @@ router.post('/signup', (req, res, next) => {
       }).catch(err => console.log(err));
   }
 }); //create new user
+
+//User profile page
+router.get('/profile', auth.onlyAuthorized, (req, res) => {
+    res.render('users/profile', { currentUser: req.user ? req.user.firstName : null });
+});
+
+//admin Dashboard
+router.get('/dashboard', auth.isAdmin, (req, res) => {
+    User.find({}, (err, users) => {
+      if(err){ console.log(err)};
+      console.log('All users: ', users);
+      res.render('users/dashboard', {
+          currentUser : req.user.firstName,
+          adminId: req.user.id,
+          users : users
+      });
+    });
+});
 
 module.exports = router;
