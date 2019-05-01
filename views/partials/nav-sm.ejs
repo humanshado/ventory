@@ -3,17 +3,20 @@
     <li class="nav-item">
       <a class="nav-link btn btn-outline-primary" href="/items">Show All</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link active" href="#">Login</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Logout</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Signup</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">UserName</a>
-    </li>
+    <% if(currentUser){ %>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><%= currentUser %></a>
+        </li>
+    <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link active" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="signup">Signup</a>
+        </li>
+    <% } %>
   </ul>
 </div>

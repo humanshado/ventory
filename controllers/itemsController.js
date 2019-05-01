@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Item } = require('../models/itemModel');
 
-router.get('/add-item', (req, res) => res.render('items/new'));
+router.get('/add-item', (req, res) => res.render('items/new', { currentUser: req.user ? req.user.firstName : null }));
 
 router.post('/add-item', (req, res) => {
   let item = new Item({
@@ -28,17 +28,17 @@ router.post('/add-item', (req, res) => {
 });
 
 router.get('/items', (req, res) => {
-    // console.log('current user = ', req.user);
-    // console.log('Is user authenticated? = ', req.isAuthenticated());
+    console.log('current user in items controller ', req.user);
+    console.log('Is user authenticated in items controller ', req.isAuthenticated());
     Item.find().then(items => {
-    res.render('items', { items: items })
+      res.render('items', { items: items, currentUser: req.user ? req.user.firstName : null })
   }).catch(err => console.log('Fetching all items failed', err));
 });
 
 router.get('/show-item/:id', (req, res) => {
   const itemId = req.params.id;
   Item.findById(itemId).then(item => {
-    res.render('items/show', { item: item })
+    res.render('items/show', { item: item, currentUser: req.user ? req.user.firstName : null })
   }).catch(err => console.log('Show item details failed', err));
 
 });

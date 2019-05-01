@@ -19,16 +19,16 @@ router.post('/login', (req, res, next) => {
 
 //User profile page
 router.get('/profile', isloggedIn, (req, res) => {
-    console.log('req.user', req.user);
-    console.log('req.isAuthenticated', req.isAuthenticated());
-    res.render('users/profile', { user: req.user });
+    console.log('req.user in users controller', req.user);
+    console.log('req.isAuthenticated in users controller', req.isAuthenticated());
+    res.render('users/profile', { currentUser: req.user ? req.user.firstName : null });
 });
 
 //logout user
 router.get('/logout', (req, res) => {
   req.logout();
   req.flash('success_msg', 'You are logged out');
-  res.redirect('/users/login');
+  res.redirect('/');
 });
 
 //display signup form
@@ -82,9 +82,9 @@ router.post('/signup', (req, res, next) => {
                     }
                     req.logIn(user, (err) => {
                       if (err) { return next(err); }
-                      console.log('automatically logged in', user);
+                      //console.log('automatically logged in', user);
                       user.last_logged_in = moment(Date.now()).fromNow();
-                      req.flash('success_msg',`${user.firstName}, You are now registered and logged in`);
+                      //req.flash('success_msg',`${user.firstName}, You are now registered and logged in`);
                       return res.redirect('/profile');
                     });
                   })(req, res, next);
